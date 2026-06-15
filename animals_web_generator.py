@@ -9,7 +9,11 @@ def generate_animals_web():
         animals = json.load(file)
     return animals
 
-animals = generate_animals_from_json(ANIMALS_FILE)
+def generate_animals_from_html(ANIMALS_HTML_FILE):
+    with open(ANIMALS_HTML_FILE, "r") as file:
+        html = file.read()
+    return html
+
 
 class Animal:
     def __init__(
