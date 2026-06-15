@@ -67,9 +67,9 @@ class Animal:
     def __str__(self):
         return f"{self.name} ({self.scientific_name})"
 
-    @classmethod
-    def form_dict(cls, animal_dict):
-        return cls(**animal_dict)
+def animal_from_dict(data: dict) -> Animal:
+    taxonomy = data["taxonomy"]
+    characteristics = data["characteristics"]
 
     return Animal(
         name=data["name"],
