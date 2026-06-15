@@ -137,19 +137,19 @@ def animal_from_dict(data: dict) -> Animal:
         scientific_name=taxonomy.get("scientific_name"),
         locations=location_list,
 
-                # Characteristics (alle neuen Felder)
-                distinctive_feature=c.get("distinctive_feature"),
-                temperament=c.get("temperament"),
-                training=c.get("training"),
-                diet=c.get("diet"),
-                average_litter_size=c.get("average_litter_size"),
-                type_=c.get("type"),
-                common_name=c.get("common_name"),
-                slogan=c.get("slogan"),
-                group=c.get("group"),
-                color=c.get("color"),
-                skin_type=c.get("skin_type"),
-                lifespan=c.get("lifespan"),
+        # Characteristics (alte Felder)
+        distinctive_feature=characteristics.get("distinctive_feature"),
+        temperament=characteristics.get("temperament"),
+        training=characteristics.get("training"),
+        diet=characteristics.get("diet"),
+        average_litter_size=characteristics.get("average_litter_size"),
+        type_=characteristics.get("type"),
+        common_name=characteristics.get("common_name"),
+        slogan=characteristics.get("slogan"),
+        group=characteristics.get("group"),
+        color=characteristics.get("color"),
+        skin_type=characteristics.get("skin_type"),
+        lifespan=characteristics.get("lifespan"),
 
                 # Neue Felder
                 prey=characteristics.get("prey") or characteristics.get("main_prey"),
