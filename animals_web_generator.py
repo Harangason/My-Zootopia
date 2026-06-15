@@ -71,29 +71,29 @@ def animal_from_dict(data: dict) -> Animal:
     taxonomy = data["taxonomy"]
     characteristics = data["characteristics"]
 
-    return Animal(
-        name=data["name"],
-        kingdom=taxonomy.get("kingdom"),
-        phylum=taxonomy.get("phylum"),
-        animal_class=taxonomy.get("class"),
-        order=taxonomy.get("order"),
-        family=taxonomy.get("family"),
-        genus=taxonomy.get("genus"),
-        scientific_name=taxonomy.get("scientific_name"),
-        locations=data.get("locations", []),
-        distinctive_feature=characteristics.get("distinctive_feature"),
-        temperament=characteristics.get("temperament"),
-        training=characteristics.get("training"),
-        diet=characteristics.get("diet"),
-        average_litter_size=characteristics.get("average_litter_size"),
-        type_=characteristics.get("type"),
-        common_name=characteristics.get("common_name"),
-        slogan=characteristics.get("slogan"),
-        group=characteristics.get("group"),
-        color=characteristics.get("color"),
-        skin_type=characteristics.get("skin_type"),
-        lifespan=characteristics.get("lifespan")
-    )
+        return Animal(
+            name=data["name"],
+            kingdom=taxonomy.get("kingdom"),
+            phylum=taxonomy.get("phylum"),
+            animal_class=taxonomy.get("class"),
+            order=taxonomy.get("order"),
+            family=taxonomy.get("family"),
+            genus=taxonomy.get("genus"),
+            scientific_name=taxonomy.get("scientific_name"),
+            locations=data.get("locations", []),
+            distinctive_feature=characteristics.get("distinctive_feature"),
+            temperament=characteristics.get("temperament"),
+            training=characteristics.get("training"),
+            diet=characteristics.get("diet"),
+            average_litter_size=characteristics.get("average_litter_size"),
+            type_=characteristics.get("type"),
+            common_name=characteristics.get("common_name"),
+            slogan=characteristics.get("slogan"),
+            group=characteristics.get("group"),
+            color=characteristics.get("color"),
+            skin_type=characteristics.get("skin_type"),
+            lifespan=characteristics.get("lifespan")
+        )
 
 class AnimalRepository:
     def __init__(self, animals_list: dict = None) -> None:
