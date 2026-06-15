@@ -94,27 +94,50 @@ def animal_from_dict(data: dict) -> Animal:
     characteristics = data["characteristics"]
 
         return Animal(
-            name=data["name"],
-            kingdom=taxonomy.get("kingdom"),
-            phylum=taxonomy.get("phylum"),
-            animal_class=taxonomy.get("class"),
-            order=taxonomy.get("order"),
-            family=taxonomy.get("family"),
-            genus=taxonomy.get("genus"),
-            scientific_name=taxonomy.get("scientific_name"),
-            locations=data.get("locations", []),
-            distinctive_feature=characteristics.get("distinctive_feature"),
-            temperament=characteristics.get("temperament"),
-            training=characteristics.get("training"),
-            diet=characteristics.get("diet"),
-            average_litter_size=characteristics.get("average_litter_size"),
-            type_=characteristics.get("type"),
-            common_name=characteristics.get("common_name"),
-            slogan=characteristics.get("slogan"),
-            group=characteristics.get("group"),
-            color=characteristics.get("color"),
-            skin_type=characteristics.get("skin_type"),
-            lifespan=characteristics.get("lifespan")
+            Animal(
+                name=data.get("name"),
+                kingdom=taxonomy.get("kingdom"),
+                phylum=taxonomy.get("phylum"),
+                animal_class=taxonomy.get("class"),
+                order=taxonomy.get("order"),
+                family=taxonomy.get("family"),
+                genus=taxonomy.get("genus"),
+                scientific_name=taxonomy.get("scientific_name"),
+                locations=data.get("locations", []),
+
+                # Characteristics (alle neuen Felder)
+                distinctive_feature=c.get("distinctive_feature"),
+                temperament=c.get("temperament"),
+                training=c.get("training"),
+                diet=c.get("diet"),
+                average_litter_size=c.get("average_litter_size"),
+                type_=c.get("type"),
+                common_name=c.get("common_name"),
+                slogan=c.get("slogan"),
+                group=c.get("group"),
+                color=c.get("color"),
+                skin_type=c.get("skin_type"),
+                lifespan=c.get("lifespan"),
+
+                # Neue Felder
+                prey=c.get("prey") or c.get("main_prey"),
+                name_of_young=c.get("name_of_young"),
+                group_behavior=c.get("group_behavior"),
+                estimated_population_size=c.get("estimated_population_size"),
+                biggest_threat=c.get("biggest_threat"),
+                most_distinctive_feature=c.get("most_distinctive_feature"),
+                other_name=c.get("other_name(s)"),
+                gestation_period=c.get("gestation_period"),
+                litter_size=c.get("litter_size"),
+                habitat=c.get("habitat"),
+                number_of_species=c.get("number_of_species"),
+                location=data.get("locations"),  # du nutzt das doppelt
+                top_speed=c.get("top_speed"),
+                weight=c.get("weight"),
+                length=c.get("length"),
+                age_of_sexual_maturity=c.get("age_of_sexual_maturity"),
+                age_of_weaning=c.get("age_of_weaning")
+            )
         )
 
 class AnimalRepository:
