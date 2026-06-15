@@ -115,6 +115,18 @@ print(f"{repo.animals}")
 def main():
 
     if ANIMALS_FILE.exists():
+        animals_data = generate_animals_from_json(ANIMALS_FILE)
+    else:
+        print("File not found")
+        return
+
+    if animals_data:
+        animal_repository = AnimalRepository(animals_data)
+        print(animal_repository.animals)
+    else:
+        print("No animals found")
+
+   
 
     animals = generate_animals_web(ANIMALS_FILE)
     print(animals)
