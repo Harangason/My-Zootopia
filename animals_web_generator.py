@@ -151,26 +151,26 @@ def animal_from_dict(data: dict) -> Animal:
         skin_type=characteristics.get("skin_type"),
         lifespan=characteristics.get("lifespan"),
 
-                # Neue Felder
-                prey=characteristics.get("prey") or characteristics.get("main_prey"),
-                name_of_young=characteristics.get("name_of_young"),
-                group_behavior=characteristics.get("group_behavior"),
-                estimated_population_size=characteristics.get("estimated_population_size"),
-                biggest_threat=characteristics.get("biggest_threat"),
-                most_distinctive_feature=characteristics.get("most_distinctive_feature"),
-                other_name=characteristicsget("other_name(s)"),
-                gestation_period=characteristics.get("gestation_period"),
-                litter_size=characteristics.get("litter_size"),
-                habitat=characteristics.get("habitat"),
-                number_of_species=characteristics.get("number_of_species"),
-                location=data.get("locations"),  # du nutzt das doppelt
-                top_speed=c.get("top_speed"),
-                weight=c.get("weight"),
-                length=c.get("length"),
-                age_of_sexual_maturity=c.get("age_of_sexual_maturity"),
-                age_of_weaning=c.get("age_of_weaning")
-            )
-        )
+        # Neue Felder
+        prey=characteristics.get("prey") or characteristics.get("main_prey"),
+        name_of_young=characteristics.get("name_of_young"),
+        group_behavior=characteristics.get("group_behavior"),
+        estimated_population_size=characteristics.get("estimated_population_size"),
+        biggest_threat=characteristics.get("biggest_threat"),
+        most_distinctive_feature=characteristics.get("most_distinctive_feature"),
+        other_name=characteristics.get("other_name(s)"),
+        gestation_period=characteristics.get("gestation_period"),
+        litter_size=characteristics.get("litter_size"),
+        habitat=characteristics.get("habitat"),
+        number_of_species=characteristics.get("number_of_species"),
+        top_speed=characteristics.get("top_speed"),
+        weight=characteristics.get("weight"),
+        length=characteristics.get("length"),
+        age_of_sexual_maturity=characteristics.get("age_of_sexual_maturity"),
+        age_of_weaning=characteristics.get("age_of_weaning")
+    )
+
+
 
 class AnimalRepository:
     def __init__(self, animals_list: dict = None) -> None:
