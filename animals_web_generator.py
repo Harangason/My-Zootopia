@@ -122,7 +122,8 @@ def main():
 
     if animals_data:
         animal_repository = AnimalRepository(animals_data)
-        print(animal_repository.animals)
+        for animal in animal_repository.animals:
+            print(animal.name) # show name of animal
     else:
         print("No animals found")
 
