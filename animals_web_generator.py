@@ -105,7 +105,10 @@ class AnimalRepository:
                 self.animals.append(animals)
 
 
-'''
+repo = AnimalRepository(animals_data)
+print(f"{repo.animals}")
+
+
 
 
 
