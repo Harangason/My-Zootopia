@@ -115,17 +115,27 @@ def animal_from_dict(data: dict) -> Animal:
     taxonomy = data["taxonomy"]
     characteristics = data["characteristics"]
 
-        return Animal(
-            Animal(
-                name=data.get("name"),
-                kingdom=taxonomy.get("kingdom"),
-                phylum=taxonomy.get("phylum"),
-                animal_class=taxonomy.get("class"),
-                order=taxonomy.get("order"),
-                family=taxonomy.get("family"),
-                genus=taxonomy.get("genus"),
-                scientific_name=taxonomy.get("scientific_name"),
-                locations=data.get("locations", []),
+    # --- Location vereinheitlichen ---
+    location_list = data.get("locations", [])
+
+    # Sonderfall: "location" in characteristics
+    single_location = characteristics.get("location")
+    if single_location:
+        if isinstance(location_list, list):
+            location_list.append(single_location)
+        else:
+            location_list = [location_list, single_location]
+
+    return Animal(
+        name=data.get("name"),
+        kingdom=taxonomy.get("kingdom"),
+        phylum=taxonomy.get("phylum"),
+        animal_class=taxonomy.get("class"),
+        order=taxonomy.get("order"),
+        family=taxonomy.get("family"),
+        genus=taxonomy.get("genus"),
+        scientific_name=taxonomy.get("scientific_name"),
+        locations=location_list,
 
                 # Characteristics (alle neuen Felder)
                 distinctive_feature=c.get("distinctive_feature"),
