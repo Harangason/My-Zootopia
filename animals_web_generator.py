@@ -202,6 +202,12 @@ def main():
         animal_repository = AnimalRepository(animals_data)
         for animal in animal_repository.animals:
             print(animal.name) # show name of animal
+            print(animal.diet)
+            if animal.location:
+                print(animal.location)
+            if animal.type:
+                print(animal.type)
+
     else:
         print("No animals found")
 
