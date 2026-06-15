@@ -51,6 +51,28 @@ class Animal:
         self.locations = locations
 
         # Characteristics
+        self.prey = pretty
+        self.name_of_young = name_of_young
+        self.group_behavior = group_behavior
+        self.estimated_population_size = estimated_population_size
+        self.biggest_threat = biggest_threat
+        self.most_distinctive_feature =most_distinctive_feature
+        self.other_name = other_name
+        self.gestation_period =gestation_period
+        self.litter_size = litter_size
+        self.habitat = habitat
+        self.diet = diet
+        self.type = type_
+        self.number_of_species =number_of_species
+        self.location = locations
+        self.color = color
+        self.skin_type = skin_type
+        self.top_speed = top_speed
+        self.lifespan = lifespan
+        self.weight = weight
+        self.length = length
+        self.age_of_sexual_maturity = age_of_sexual_maturity
+        self.age_of_weaning = age_of_weaning
         self.distinctive_feature = distinctive_feature
         self.temperament = temperament
         self.training = training
