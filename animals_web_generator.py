@@ -71,6 +71,7 @@ class Animal:
 
         # Locations
         self.locations = locations
+        self.location = location   # Einzelort (Chile etc.)
 
         # Characteristics
         self.prey = pretty
