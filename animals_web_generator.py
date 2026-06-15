@@ -95,6 +95,14 @@ def animal_from_dict(data: dict) -> Animal:
         lifespan=characteristics.get("lifespan")
     )
 
+class AnimalRepository:
+    def __init__(self, animals_list: dict = None) -> None:
+        self.animals = []
+
+        if animals_list:
+            for animal_dict in animals_list:
+                animals = Animal.from_dict(animal_dict)
+                self.animals.append(animals)
 
 
 '''
