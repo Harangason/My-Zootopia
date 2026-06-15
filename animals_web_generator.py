@@ -67,6 +67,10 @@ class Animal:
     def __str__(self):
         return f"{self.name} ({self.scientific_name})"
 
+    @classmethod
+    def form_dict(cls, animal_dict):
+        return cls(**animal_dict)
+
 
 
 
