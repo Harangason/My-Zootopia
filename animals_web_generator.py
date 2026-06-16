@@ -203,8 +203,9 @@ def main():
         return
     if ANIMALS_HTML_FILE.exists():
         animals_html = generate_animals_from_html(ANIMALS_HTML_FILE)
-        soup = BeautifulSoup(animals_html)
-
+       # soup = BeautifulSoup(animals_html)
+    else:
+        print("HTML-File not found")
 
     if animals_data:
         animal_repository = AnimalRepository(animals_data)
