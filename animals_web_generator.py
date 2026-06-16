@@ -13,8 +13,8 @@ def generate_animals_from_json(ANIMALS_FILE):
 
 def generate_animals_from_html(ANIMALS_HTML_FILE):
     with open(ANIMALS_HTML_FILE, "r") as file:
-        html = file.read()
-    return html
+        html_as_string = file.read()
+    return html_as_string
 
 def generate_animals_to_html(output):
     with open(ANIMALS_TO_HTML_FILE, "w") as file:
@@ -226,9 +226,8 @@ def main():
     else:
         print("No animals found")
         
-    html_as_string = generate_animals_from_html(ANIMALS_HTML_FILE)
-    for search_for_str in output_dict:
-        html_as_string = html_as_string.replace(search_for_str, str(output))
+    if search_for_str in animals_html:
+        html_as_string = animals_html.replace(search_for_str, str(output))
 
     generate_animals_to_html(html_as_string)
 
