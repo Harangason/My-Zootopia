@@ -212,7 +212,10 @@ def main():
             print(animal.name) # show name of animal
             print(animal.diet)
             if animal.location:
-                print(animal.location)
+                value_location = animal.location
+            else:
+                value_location = ""
+
             if animal.type:
                 print(animal.type)
 
