@@ -217,7 +217,9 @@ def main():
                 value_location = ""
 
             if animal.type:
-                print(animal.type)
+                value_type = animal.type
+            else:
+                value_type = ""
 
     else:
         print("No animals found")
