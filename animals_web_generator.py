@@ -199,7 +199,7 @@ def main():
     if ANIMALS_FILE.exists():
         animals_data = generate_animals_from_json(ANIMALS_FILE)
     else:
-        print("File not found")
+        print("JSON-File not found")
         return
     if ANIMALS_HTML_FILE.exists():
         animals_html = generate_animals_from_html(ANIMALS_HTML_FILE)
