@@ -7,7 +7,7 @@ ANIMALS_FILE = BASE_DIR / "animals_data.json"
 ANIMALS_HTML_FILE = BASE_DIR / "animals_template.html"
 ANIMALS_TO_HTML_FILE = BASE_DIR / "animals.html"
 def generate_animals_from_json(ANIMALS_FILE):
-    with open(ANIMALS_FILE, "r") as file:
+    with open(ANIMALS_FILE, "r", encoding="utf-8") as file:
         animals = json.load(file)
     return animals
 
@@ -17,7 +17,7 @@ def generate_animals_from_html(ANIMALS_HTML_FILE):
     return html_as_string
 
 def generate_animals_to_html(output):
-    with open(ANIMALS_TO_HTML_FILE, "w") as file:
+    with open(ANIMALS_TO_HTML_FILE, "w", encoding="utf-8") as file:
         file.write(output)
     return output
 
@@ -183,6 +183,27 @@ class AnimalRepository:
             for animal_dict in animals_list:
                 animals = from_dict(animal_dict)
                 self.animals.append(animals)
+                
+def serialize_animal(animal_dict):
+    html_output = ""
+
+    for name, attributes in animal_dict.items():
+        html_output += "<li class='cards__item'>\n"
+        html_output += f"  <div class='card__title'>{name}</div>\n"
+        html_output += f"  <div class='card__text'>\n"
+        gtml_output += f"    <ul>\n"
+        html_output += f"    <li><strong>Diet:</strong> {attributes.get('diet', '')}<br/>\n"
+        if attributes.get('locations'):
+            html_output += f"    <li><strong>Location:</strong> {attributes.get('locations', '')}<br/>\n"
+        else:
+            html_output += f"    <li>strong>Location:</strong> {attributes.get('location', '')}<br/>\n"
+        if attributes.get('type'):
+            html_output += f"    <li><strong>Type:</strong> {attributes.get('type', '')}<br/>\n"
+        html_output += "  </ul>\n"
+        html_output += " </div>\n"
+        html_output += "</li>\n"
+
+    return html_output
 
 def main():
     output = ""
@@ -203,36 +224,31 @@ def main():
         animal_repository = AnimalRepository(animals_data)
         for animal in animal_repository.animals:
             if animal.location:
-                value_location = animal.location
+                location_list = animal.location
+                location = ", ".join(location_list.split(","))
             else:
-                value_location = ""
+                location = ""
+            if animal.locations:
+                location_list = animal.locations
+                locations = ", ".join(location_list[0].split())
+            else:
+                locations = ""
 
             if animal.type:
                 value_type = animal.type
             else:
                 value_type = ""
-            ''' for debugging:'''
-            output += (f" Name: {animal.name}\n"
-                       f" Diet: {animal.diet}\n"
-                       f" Location: {value_location}\n"
-                       f" Type: {value_type}")
-            #print(output)
-            # build html output
             output_dict[animal.name] = {
-                "diet": animal.diet,
-                "location": value_location,
-                "type": value_type
-            }
+                                        "diet": animal.diet,
+                                        "location": location,
+                                        "locations": locations,
+                                        "type": value_type
+                                    }
     else:
         print("No animals found")
-        
     if search_for_str in animals_html:
-        html_as_string = animals_html.replace(search_for_str, str(output))
-
-    generate_animals_to_html(html_as_string)
-
-
-    return
+        animals_html = animals_html.replace(search_for_str, serialize_animal(output_dict))
+    generate_animals_to_html(animals_html)
 
 if __name__ == "__main__":
     main()
