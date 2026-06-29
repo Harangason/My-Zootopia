@@ -1,4 +1,5 @@
 import json
+from html import escape
 from pathlib import Path
 
 
@@ -6,20 +7,25 @@ BASE_DIR = Path(__file__).resolve().parent
 ANIMALS_FILE = BASE_DIR / "animals_data.json"
 ANIMALS_HTML_FILE = BASE_DIR / "animals_template.html"
 ANIMALS_TO_HTML_FILE = BASE_DIR / "animals.html"
+
+
 def generate_animals_from_json(ANIMALS_FILE):
     with open(ANIMALS_FILE, "r", encoding="utf-8") as file:
         animals = json.load(file)
     return animals
 
+
 def generate_animals_from_html(ANIMALS_HTML_FILE):
-    with open(ANIMALS_HTML_FILE, "r") as file:
+    with open(ANIMALS_HTML_FILE, "r", encoding="utf-8") as file:
         html_as_string = file.read()
     return html_as_string
+
 
 def generate_animals_to_html(output):
     with open(ANIMALS_TO_HTML_FILE, "w", encoding="utf-8") as file:
         file.write(output)
     return output
+
 
 class Animal:
     def __init__(
@@ -108,11 +114,10 @@ class Animal:
         self.slogan = slogan
         self.group = group
 
-        # ⭐ Automatische Liste aller Attribute
+        # Automatische Liste aller Attribute
         self.attributes = list(self.__dict__.keys())
 
 
-@staticmethod
 def from_dict(data: dict):
     taxonomy = data["taxonomy"]
     characteristics = data["characteristics"]
@@ -183,30 +188,39 @@ class AnimalRepository:
             for animal_dict in animals_list:
                 animals = from_dict(animal_dict)
                 self.animals.append(animals)
-                
+
+
+def format_html_value(value):
+    if isinstance(value, list):
+        return escape(", ".join(str(item) for item in value if item))
+    if value is None:
+        return ""
+    return escape(str(value))
+
+
 def serialize_animal(animal_dict):
     html_output = ""
 
     for name, attributes in animal_dict.items():
         html_output += "<li class='cards__item'>\n"
-        html_output += f"  <div class='card__title'>{name}</div>\n"
-        html_output += f"  <div class='card__text'>\n"
-        gtml_output += f"    <ul>\n"
-        html_output += f"    <li><strong>Diet:</strong> {attributes.get('diet', '')}<br/>\n"
-        if attributes.get('locations'):
-            html_output += f"    <li><strong>Location:</strong> {attributes.get('locations', '')}<br/>\n"
-        else:
-            html_output += f"    <li>strong>Location:</strong> {attributes.get('location', '')}<br/>\n"
-        if attributes.get('type'):
-            html_output += f"    <li><strong>Type:</strong> {attributes.get('type', '')}<br/>\n"
+        html_output += f"  <div class='card__title'>{format_html_value(name)}</div>\n"
+        html_output += "  <div class='card__text'>\n"
+        html_output += "    <ul>\n"
+        html_output += f"      <li><strong>Diet:</strong> {format_html_value(attributes.get('diet'))}</li>\n"
+
+        location = attributes.get("locations") or attributes.get("location")
+        if location:
+            html_output += f"      <li><strong>Location:</strong> {format_html_value(location)}</li>\n"
+        if attributes.get("type"):
+            html_output += f"      <li><strong>Type:</strong> {format_html_value(attributes.get('type'))}</li>\n"
         html_output += "  </ul>\n"
         html_output += " </div>\n"
         html_output += "</li>\n"
 
     return html_output
 
+
 def main():
-    output = ""
     output_dict = {}
     search_for_str = "__REPLACE_ANIMALS_INFO__"
     if ANIMALS_FILE.exists():
@@ -223,21 +237,9 @@ def main():
     if animals_data:
         animal_repository = AnimalRepository(animals_data)
         for animal in animal_repository.animals:
-            if animal.location:
-                location_list = animal.location
-                location = ", ".join(location_list.split(","))
-            else:
-                location = ""
-            if animal.locations:
-                location_list = animal.locations
-                locations = ", ".join(location_list[0].split())
-            else:
-                locations = ""
-
-            if animal.type:
-                value_type = animal.type
-            else:
-                value_type = ""
+            location = animal.location or ""
+            locations = animal.locations or []
+            value_type = animal.type or ""
             output_dict[animal.name] = {
                                         "diet": animal.diet,
                                         "location": location,
